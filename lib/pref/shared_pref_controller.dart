@@ -25,7 +25,7 @@ class SharedPrefController {
     }
   }
 
-  void save(UserData user) async {
+  Future<void> save(UserData user) async {
     await _sharedPreferences.setBool(PrefKeys.loggedIn.name, true);
     await _sharedPreferences.setString(PrefKeys.user.name, userToJson(user));
     await _sharedPreferences.setString(

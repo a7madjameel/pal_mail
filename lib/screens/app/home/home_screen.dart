@@ -189,7 +189,7 @@ class _HomeScreenState extends State<HomeScreen> with Helper {
                           ),
                           Center(
                             child: Text(
-                              'Ahmed Jarad',
+                              'Ahmed Jameel',
                               textAlign: TextAlign.center,
                               style: GoogleFonts.poppins(),
                             ),
@@ -581,12 +581,9 @@ class _HomeScreenState extends State<HomeScreen> with Helper {
   Future<ApiHelper> userLogout(context) async {
     ApiHelper apiHelper = await AuthController().logout();
     if (apiHelper.success) {
-      Navigator.pushNamedAndRemoveUntil(
+      Navigator.pushReplacementNamed(
         context,
         SplashScreen.id,
-        (route) {
-          return false;
-        },
       );
     }
     showSnackBar(context,

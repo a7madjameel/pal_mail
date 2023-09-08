@@ -54,7 +54,7 @@ class AuthController with Helper {
     String token =
         SharedPrefController().getValueFor<String>(key: PrefKeys.token.name)!;
     Uri uri = Uri.parse(ApiController.logout);
-    var response = await http.get(uri, headers: {
+    var response = await http.post(uri, headers: {
       HttpHeaders.authorizationHeader: token,
       HttpHeaders.acceptHeader: 'application/json'
     });
