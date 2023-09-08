@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pal_mail/pref/shared_pref_controller.dart';
+import 'package:pal_mail/screens/app/home/home_screen.dart';
+import 'package:pal_mail/screens/auth/login_screen.dart';
+import 'package:pal_mail/screens/auth/auth_tab_bar.dart';
 import 'package:pal_mail/screens/splash_screen.dart';
 
 void main() async {
@@ -27,7 +30,7 @@ class MyApp extends StatelessWidget {
             appBarTheme: AppBarTheme(
               backgroundColor: Colors.white,
               titleTextStyle: GoogleFonts.poppins(
-                fontSize: 20,
+                fontSize: 20.sp,
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
               ),
@@ -39,6 +42,8 @@ class MyApp extends StatelessWidget {
           initialRoute: SplashScreen.id,
           routes: {
             SplashScreen.id: (context) => const SplashScreen(),
+            AuthTabBar.id: (context) => const AuthTabBar(),
+            HomeScreen.id: (context) => const HomeScreen(),
           },
         );
       },
