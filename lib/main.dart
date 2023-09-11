@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pal_mail/pref/shared_pref_controller.dart';
 import 'package:pal_mail/screens/app/home/home_screen.dart';
-import 'package:pal_mail/screens/auth/login_screen.dart';
 import 'package:pal_mail/screens/auth/auth_tab_bar.dart';
 import 'package:pal_mail/screens/splash_screen.dart';
 
@@ -26,9 +25,14 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-            scaffoldBackgroundColor: Colors.white,
+            scaffoldBackgroundColor: const Color(0xffF7F6FF),
+            colorScheme: Theme.of(context).colorScheme.copyWith(
+                  primary: const Color(0xff003AFC),
+                  surface: const Color(0xffB2B2B2),
+                  secondary: const Color(0xff587FFF),
+                ),
             appBarTheme: AppBarTheme(
-              backgroundColor: Colors.white,
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               titleTextStyle: GoogleFonts.poppins(
                 fontSize: 20.sp,
                 fontWeight: FontWeight.bold,

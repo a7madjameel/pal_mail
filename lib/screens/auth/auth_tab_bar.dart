@@ -113,9 +113,10 @@ class _AuthTabBarState extends State<AuthTabBar> with TickerProviderStateMixin {
                       physics: const NeverScrollableScrollPhysics(),
                       indicator: BoxDecoration(
                         borderRadius: BorderRadius.circular(12.r),
-                        color: kPrimaryColor,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
-                      unselectedLabelColor: kPrimaryColor,
+                      unselectedLabelColor:
+                          Theme.of(context).colorScheme.primary,
                       labelColor: Colors.white,
                       controller: _tabController,
                       tabs: [

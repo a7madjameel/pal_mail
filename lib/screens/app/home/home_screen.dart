@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
+import 'package:pal_mail/screens/app/AddInbox/AddInboxSheet.dart';
 import 'package:pal_mail/screens/app/home/search_screen.dart';
+
 import '../../../controllers/auth_controller.dart';
 import '../../../controllers/status_controller.dart';
 import '../../../controllers/tags_controller.dart';
@@ -52,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> with Helper {
       backdrop: Container(
         width: double.infinity,
         height: double.infinity,
-        color: kPrimaryColor,
+        color: Theme.of(context).colorScheme.primary,
       ),
       controller: _advancedDrawerController,
       animationCurve: Curves.easeInOut,
@@ -198,7 +200,8 @@ class _HomeScreenState extends State<HomeScreen> with Helper {
                             'admin',
                             textAlign: TextAlign.center,
                             style: GoogleFonts.poppins(
-                                color: kHintColor, height: 1.h),
+                                color: Theme.of(context).colorScheme.surface,
+                                height: 1.h),
                           ),
                         ],
                       ),
@@ -212,7 +215,8 @@ class _HomeScreenState extends State<HomeScreen> with Helper {
                         leading: const Icon(Icons.language_outlined),
                         title: Text(
                           'English',
-                          style: GoogleFonts.poppins(color: kHintColor),
+                          style: GoogleFonts.poppins(
+                              color: Theme.of(context).colorScheme.surface),
                         ),
                       ),
                     ),
@@ -227,7 +231,8 @@ class _HomeScreenState extends State<HomeScreen> with Helper {
                         leading: const Icon(Icons.logout),
                         title: Text(
                           'Logout',
-                          style: GoogleFonts.poppins(color: kHintColor),
+                          style: GoogleFonts.poppins(
+                              color: Theme.of(context).colorScheme.surface),
                         ),
                       ),
                     ),
@@ -336,7 +341,8 @@ class _HomeScreenState extends State<HomeScreen> with Helper {
                       children: _item.map((e) {
                         return ExpansionPanel(
                           canTapOnHeader: true,
-                          backgroundColor: kScaffoldColor,
+                          backgroundColor:
+                              Theme.of(context).scaffoldBackgroundColor,
                           isExpanded: e.isExpanded,
                           headerBuilder: (context, isExpanded) {
                             return Text(
@@ -390,7 +396,9 @@ class _HomeScreenState extends State<HomeScreen> with Helper {
                                           'Today, 11:00 AM',
                                           style: GoogleFonts.poppins(
                                               fontSize: 12.sp,
-                                              color: kHintColor),
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .surface),
                                         ),
                                       ],
                                     ),
@@ -410,7 +418,9 @@ class _HomeScreenState extends State<HomeScreen> with Helper {
                                       'And here excerpt of the mail, can ',
                                       style: GoogleFonts.poppins(
                                         fontSize: 14.sp,
-                                        color: kLightPrimaryColor,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary,
                                       ),
                                     ),
                                     SizedBox(
@@ -423,14 +433,18 @@ class _HomeScreenState extends State<HomeScreen> with Helper {
                                           textAlign: TextAlign.start,
                                           style: GoogleFonts.poppins(
                                               fontSize: 14.sp,
-                                              color: kLightPrimaryColor),
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary),
                                         ),
                                         Text(
                                           '#Egyptian Military',
                                           textAlign: TextAlign.start,
                                           style: GoogleFonts.poppins(
                                               fontSize: 14.sp,
-                                              color: kLightPrimaryColor),
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary),
                                         ),
                                       ],
                                     ),
@@ -497,7 +511,8 @@ class _HomeScreenState extends State<HomeScreen> with Helper {
                                   spacing: 15,
                                   children: [
                                     Chip(
-                                      backgroundColor: kHintColor,
+                                      backgroundColor:
+                                          Theme.of(context).colorScheme.surface,
                                       labelStyle: GoogleFonts.montserrat(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,
@@ -526,16 +541,24 @@ class _HomeScreenState extends State<HomeScreen> with Helper {
             GestureDetector(
               onTap: () {
                 showModalBottomSheet(
+                  clipBehavior: Clip.antiAlias,
                   context: context,
+                  isScrollControlled: true,
+                  useSafeArea: true,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(25.r),
+                    ),
+                  ),
                   builder: (context) {
-                    return BottomSheet(
-                      onClosing: () {},
-                      builder: (context) {
-                        return const Column(
-                          children: [Text('Ahmed')],
-                        );
-                      },
-                    );
+                    return DraggableScrollableSheet(
+                        initialChildSize: 0.99,
+                        maxChildSize: 0.99,
+                        minChildSize: 0.99,
+                        expand: true,
+                        builder: (context, scrollController) {
+                          return const AddInboxSheet();
+                        });
                   },
                 );
               },
@@ -543,15 +566,15 @@ class _HomeScreenState extends State<HomeScreen> with Helper {
                 height: 50,
                 width: double.infinity,
                 padding: const EdgeInsets.all(10),
-                decoration: const BoxDecoration(
-                  color: Colors.white,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).scaffoldBackgroundColor,
                 ),
                 child: Row(
                   children: [
-                    const CircleAvatar(
+                    CircleAvatar(
                       radius: 16,
-                      backgroundColor: kLightPrimaryColor,
-                      child: Icon(
+                      backgroundColor: Theme.of(context).colorScheme.secondary,
+                      child: const Icon(
                         Icons.add,
                         color: Colors.white,
                         size: 30,
@@ -565,7 +588,7 @@ class _HomeScreenState extends State<HomeScreen> with Helper {
                       textAlign: TextAlign.start,
                       style: GoogleFonts.poppins(
                         fontSize: 20.sp,
-                        color: kLightPrimaryColor,
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
                   ],
