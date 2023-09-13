@@ -543,6 +543,7 @@ class _HomeScreenState extends State<HomeScreen> with Helper {
                 showModalBottomSheet(
                   clipBehavior: Clip.antiAlias,
                   context: context,
+                  isDismissible: false,
                   isScrollControlled: true,
                   useSafeArea: true,
                   shape: RoundedRectangleBorder(
@@ -554,10 +555,12 @@ class _HomeScreenState extends State<HomeScreen> with Helper {
                     return DraggableScrollableSheet(
                         initialChildSize: 0.99,
                         maxChildSize: 0.99,
+                        snap: false,
                         minChildSize: 0.99,
                         expand: true,
                         builder: (context, scrollController) {
-                          return const AddInboxSheet();
+                          return AddInboxSheet(
+                              scrollController: scrollController);
                         });
                   },
                 );

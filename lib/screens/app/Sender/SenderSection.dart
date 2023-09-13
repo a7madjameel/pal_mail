@@ -33,6 +33,7 @@ class _SenderSectionState extends State<SenderSection> {
         MyTextField(
           controller: _controller,
           hint: 'Sender',
+          hintStyle: TextStyle(fontSize: 16.sp),
           leadingWidget: const Icon(Icons.person_outline),
           trailingWidget: Icon(Icons.info_outline,
               color: Theme.of(context).colorScheme.primary),
