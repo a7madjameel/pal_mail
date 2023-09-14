@@ -7,6 +7,7 @@ import 'package:pal_mail/screens/app/MailArchive/MailArchive.dart';
 import 'package:pal_mail/screens/app/MailTitle/MailTitle.dart';
 import 'package:pal_mail/screens/app/Status/StatusSection.dart';
 import 'package:pal_mail/screens/app/Tags/TagsSection.dart';
+import 'package:pal_mail/widgets/sheet_title_row.dart';
 
 import '../Sender/SenderSection.dart';
 
@@ -33,38 +34,8 @@ class _AddInboxSheetState extends State<AddInboxSheet> {
             child: Column(
               children: [
                 SizedBox(height: 14.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    GestureDetector(
-                      onTap: () => Navigator.pop(context),
-                      child: Text(
-                        'Cancel',
-                        style: TextStyle(
-                          fontSize: 18.sp,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      ),
-                    ),
-                    Text(
-                      'New Inbox',
-                      style: TextStyle(
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () => Navigator.pop(context),
-                      child: Text(
-                        'Done',
-                        style: TextStyle(
-                          fontSize: 18.sp,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                //Sheet title
+                const SheetTitleRow(title: 'New Inbox'),
                 //Sender section
                 SizedBox(height: 16.h),
                 const SenderSection(),

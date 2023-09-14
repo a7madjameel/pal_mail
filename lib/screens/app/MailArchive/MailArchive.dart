@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import 'package:pal_mail/widgets/MyTapWidget.dart';
 import 'package:pal_mail/widgets/MyTextField.dart';
 import 'package:pal_mail/widgets/my_section_container.dart';
 
@@ -33,11 +34,14 @@ class _MailArchiveState extends State<MailArchive> {
 
     return MySectionContainer(
       children: [
-        MyArchiveItem(
-          title: 'Date',
-          subTitle: displayDate,
-          image: 'date_time_icon.svg',
-          isSubHighlited: true,
+        MyTapWidget(
+          onTap: () {},
+          child: MyArchiveItem(
+            title: 'Date',
+            subTitle: displayDate,
+            image: 'date_time_icon.svg',
+            isSubHighlited: true,
+          ),
         ),
         Divider(
           height: 30.h,
@@ -48,7 +52,7 @@ class _MailArchiveState extends State<MailArchive> {
           title: 'Archive Number',
           image: 'archive_icon.svg',
           subWidget: SizedBox(
-            width: 340.w,
+            width: 300.w,
             height: 24.h,
             child: MyTextField(
               controller: _controller,
