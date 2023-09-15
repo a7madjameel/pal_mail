@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:pal_mail/widgets/MyTapWidget.dart';
 import 'package:pal_mail/widgets/MyTextField.dart';
 import 'package:pal_mail/widgets/my_section_container.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class MailArchive extends StatefulWidget {
   const MailArchive({super.key});
@@ -27,21 +28,46 @@ class _MailArchiveState extends State<MailArchive> {
     _controller.dispose();
   }
 
+  var date = DateTime.now();
+  bool expanded = false;
   @override
   Widget build(BuildContext context) {
-    var date = DateTime.now();
     var displayDate = DateFormat('EEEE, MMM d , yyyy').format(date).toString();
 
     return MySectionContainer(
       children: [
-        MyTapWidget(
-          onTap: () {},
-          child: MyArchiveItem(
-            title: 'Date',
-            subTitle: displayDate,
-            image: 'date_time_icon.svg',
-            isSubHighlited: true,
-          ),
+        ExpansionPanelList(
+          elevation: 0,
+          expansionCallback: (panelIndex, isExpanded) =>
+              setState(() => expanded = !expanded),
+          children: [
+            ExpansionPanel(
+              isExpanded: expanded,
+              headerBuilder: (BuildContext context, bool isExpanded) {
+                return MyTapWidget(
+                  onTap: () => setState(() => expanded = !expanded),
+                  child: MyArchiveItem(
+                    title: 'Date',
+                    subTitle: displayDate,
+                    image: 'date_time_icon.svg',
+                    isSubHighlited: true,
+                  ),
+                );
+              },
+              body: TableCalendar(
+                headerStyle: const HeaderStyle(
+                  formatButtonVisible: false,
+                  titleCentered: true,
+                ),
+                focusedDay: date,
+                firstDay: DateTime(DateTime.now().year - 1),
+                lastDay: DateTime.now(),
+                currentDay: date,
+                onDaySelected: (selectedDay, focusedDay) =>
+                    setState(() => date = selectedDay),
+              ),
+            ),
+          ],
         ),
         Divider(
           height: 30.h,
@@ -57,6 +83,7 @@ class _MailArchiveState extends State<MailArchive> {
             child: MyTextField(
               controller: _controller,
               hint: '2022/6019',
+              keyboardType: TextInputType.number,
               hintStyle: TextStyle(fontSize: 12.sp),
             ),
           ),

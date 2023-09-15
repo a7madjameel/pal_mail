@@ -11,10 +11,12 @@ class MyTextField extends StatelessWidget {
   final int? minLines;
   final bool isFilled;
   final bool hasRadius;
+  final TextInputType? keyboardType;
   final Function(String text)? onChange;
   final TextInputAction textInputAction;
   const MyTextField(
       {required this.controller,
+      this.keyboardType,
       this.hint,
       this.onChange,
       this.hasRadius = false,
@@ -34,6 +36,7 @@ class MyTextField extends StatelessWidget {
       textInputAction: textInputAction,
       maxLines: maxLines ?? 1,
       onChanged: onChange,
+      keyboardType: keyboardType ?? TextInputType.text,
       minLines: minLines ?? 1,
       style: hintStyle?.copyWith(color: Colors.black),
       decoration: InputDecoration(

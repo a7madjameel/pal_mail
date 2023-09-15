@@ -24,35 +24,33 @@ class _CategorySheetState extends State<CategorySheet> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 14.h),
       color: Theme.of(context).scaffoldBackgroundColor,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 14.h),
-        child: Column(
-          children: [
-            const SheetTitleRow(title: 'Category'),
-            SizedBox(height: 58.h),
-            MySectionContainer(
-              children: [
-                ListView.separated(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) => CategoryListTile(
-                    title: items[index],
-                    itemIndex: index,
-                    selectedIndex: selectedIndex,
-                    onTap: () => setState(() => selectedIndex = index),
-                  ),
-                  separatorBuilder: (context, index) => Divider(
-                    height: 30.h,
-                    thickness: 1.h,
-                    indent: 20.w,
-                  ),
-                  itemCount: 4,
+      child: Column(
+        children: [
+          const SheetTitleRow(title: 'Category'),
+          SizedBox(height: 58.h),
+          MySectionContainer(
+            children: [
+              ListView.separated(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemBuilder: (context, index) => CategoryListTile(
+                  title: items[index],
+                  itemIndex: index,
+                  selectedIndex: selectedIndex,
+                  onTap: () => setState(() => selectedIndex = index),
                 ),
-              ],
-            )
-          ],
-        ),
+                separatorBuilder: (context, index) => Divider(
+                  height: 30.h,
+                  thickness: 1.h,
+                  indent: 20.w,
+                ),
+                itemCount: 4,
+              ),
+            ],
+          )
+        ],
       ),
     );
   }
