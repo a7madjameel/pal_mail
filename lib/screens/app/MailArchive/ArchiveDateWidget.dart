@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -36,17 +37,21 @@ class _ArchiveDateWidgetState extends State<ArchiveDateWidget> {
               ),
             );
           },
-          body: TableCalendar(
-            headerStyle: const HeaderStyle(
-              formatButtonVisible: false,
-              titleCentered: true,
+          body: SizedBox(
+            height: 316.h,
+            child: TableCalendar(
+              headerStyle: const HeaderStyle(
+                formatButtonVisible: false,
+                titleCentered: true,
+              ),
+              focusedDay: date,
+              rowHeight: 44.h,
+              firstDay: DateTime(DateTime.now().year - 1),
+              lastDay: DateTime.now(),
+              currentDay: date,
+              onDaySelected: (selectedDay, focusedDay) =>
+                  setState(() => date = selectedDay),
             ),
-            focusedDay: date,
-            firstDay: DateTime(DateTime.now().year - 1),
-            lastDay: DateTime.now(),
-            currentDay: date,
-            onDaySelected: (selectedDay, focusedDay) =>
-                setState(() => date = selectedDay),
           ),
         ),
       ],
