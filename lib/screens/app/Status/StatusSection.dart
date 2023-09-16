@@ -36,7 +36,7 @@ class _StatusSectionState extends State<StatusSection> {
                 minChildSize: 0.99,
                 expand: true,
                 builder: (context, scrollController) {
-                  return const StatusSheet();
+                  return StatusSheet(scrollController: scrollController);
                 });
           },
         );
