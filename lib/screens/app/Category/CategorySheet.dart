@@ -6,8 +6,7 @@ import 'package:pal_mail/widgets/my_section_container.dart';
 import '../../../widgets/sheet_title_row.dart';
 
 class CategorySheet extends StatefulWidget {
-  final ScrollController scrollController;
-  const CategorySheet({required this.scrollController, super.key});
+  const CategorySheet({super.key});
 
   @override
   State<CategorySheet> createState() => _CategorySheetState();

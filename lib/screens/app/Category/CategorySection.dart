@@ -29,7 +29,7 @@ class CategorySection extends StatelessWidget {
                 minChildSize: 0.99,
                 expand: true,
                 builder: (context, scrollController) {
-                  return CategorySheet(scrollController: scrollController);
+                  return const CategorySheet();
                 });
           },
         );
