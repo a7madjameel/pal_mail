@@ -14,20 +14,23 @@ class MyTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final Function(String text)? onChange;
   final TextInputAction textInputAction;
-  const MyTextField(
-      {required this.controller,
-      this.keyboardType,
-      this.hint,
-      this.onChange,
-      this.hasRadius = false,
-      this.isFilled = false,
-      this.textInputAction = TextInputAction.done,
-      this.maxLines,
-      this.minLines,
-      this.hintStyle,
-      this.leadingWidget,
-      this.trailingWidget,
-      super.key});
+  final Function(String value)? onSubmit;
+  const MyTextField({
+    required this.controller,
+    this.keyboardType,
+    this.hint,
+    this.onChange,
+    this.hasRadius = false,
+    this.isFilled = false,
+    this.textInputAction = TextInputAction.done,
+    this.maxLines,
+    this.minLines,
+    this.hintStyle,
+    this.leadingWidget,
+    this.trailingWidget,
+    this.onSubmit,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +39,7 @@ class MyTextField extends StatelessWidget {
       textInputAction: textInputAction,
       maxLines: maxLines ?? 1,
       onChanged: onChange,
+      onSubmitted: onSubmit,
       keyboardType: keyboardType ?? TextInputType.text,
       minLines: minLines ?? 1,
       style: hintStyle?.copyWith(color: Colors.black),

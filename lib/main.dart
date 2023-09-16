@@ -2,14 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pal_mail/pref/shared_pref_controller.dart';
+import 'package:pal_mail/providers/SenderProvider.dart';
 import 'package:pal_mail/screens/app/home/home_screen.dart';
 import 'package:pal_mail/screens/auth/auth_tab_bar.dart';
 import 'package:pal_mail/screens/splash_screen.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPrefController().initPrefs();
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => SenderProvider()),
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {

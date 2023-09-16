@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pal_mail/models/user_data.dart';
+import 'package:pal_mail/providers/SenderProvider.dart';
 import 'package:pal_mail/widgets/MyTextField.dart';
 import 'package:pal_mail/widgets/sheet_title_row.dart';
+import 'package:provider/provider.dart';
 
 import 'SearchedUserListTile.dart';
 
@@ -60,7 +62,17 @@ class _SenderSearchSheetState extends State<SenderSearchSheet> {
             _controller.text.isNotEmpty
                 ? Divider(height: 28.h, thickness: 1.h)
                 : const SizedBox.shrink(),
-            Text(_controller.text.isEmpty ? '' : '"${_controller.text}"'),
+            Consumer<SenderProvider>(builder: (context, value, _) {
+              return GestureDetector(
+                  onTap: () {
+                    if (_controller.text.isNotEmpty) {
+                      value.setData(_controller.text);
+                      Navigator.pop(context);
+                    }
+                  },
+                  child: Text(
+                      _controller.text.isEmpty ? '' : '"${_controller.text}"'));
+            }),
             Divider(height: 28.h, thickness: 1.h),
             ListView.separated(
               shrinkWrap: true,

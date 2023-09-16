@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pal_mail/providers/SenderProvider.dart';
+import 'package:provider/provider.dart';
 
 import '../../../widgets/MyTextField.dart';
 import 'SenderSearchSheet.dart';
@@ -27,41 +29,46 @@ class _SenderWidgetState extends State<SenderWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return MyTextField(
-      controller: _controller,
-      hint: 'Sender',
-      hintStyle: TextStyle(fontSize: 16.sp),
-      leadingWidget: const Icon(Icons.person_outline),
-      trailingWidget: GestureDetector(
-        onTap: () {
-          showModalBottomSheet(
-            clipBehavior: Clip.antiAlias,
-            context: context,
-            isDismissible: false,
-            isScrollControlled: true,
-            useSafeArea: true,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(
-                top: Radius.circular(25.r),
-              ),
-            ),
-            builder: (context) {
-              return DraggableScrollableSheet(
-                  initialChildSize: 0.99,
-                  maxChildSize: 0.99,
-                  snap: false,
-                  minChildSize: 0.99,
-                  expand: true,
-                  builder: (context, scrollController) {
-                    return SenderSearchSheet(
-                        scrollController: scrollController);
-                  });
-            },
-          );
+    return Consumer<SenderProvider>(builder: (context, value, _) {
+      return MyTextField(
+        controller: _controller..text = value.getData(),
+        hint: 'Sender',
+        hintStyle: TextStyle(fontSize: 16.sp),
+        onSubmit: (x) {
+          value.setData(x);
         },
-        child: Icon(Icons.info_outline,
-            color: Theme.of(context).colorScheme.primary),
-      ),
-    );
+        leadingWidget: const Icon(Icons.person_outline),
+        trailingWidget: GestureDetector(
+          onTap: () {
+            showModalBottomSheet(
+              clipBehavior: Clip.antiAlias,
+              context: context,
+              isDismissible: false,
+              isScrollControlled: true,
+              useSafeArea: true,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(25.r),
+                ),
+              ),
+              builder: (context) {
+                return DraggableScrollableSheet(
+                    initialChildSize: 0.99,
+                    maxChildSize: 0.99,
+                    snap: false,
+                    minChildSize: 0.99,
+                    expand: true,
+                    builder: (context, scrollController) {
+                      return SenderSearchSheet(
+                          scrollController: scrollController);
+                    });
+              },
+            );
+          },
+          child: Icon(Icons.info_outline,
+              color: Theme.of(context).colorScheme.primary),
+        ),
+      );
+    });
   }
 }
