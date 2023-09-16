@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pal_mail/screens/app/Category/CategorySection.dart';
 
 import '../../../widgets/my_section_container.dart';
-import '../Category/CategoryWdget.dart';
 import 'SenderWidget.dart';
 
 class SenderSection extends StatelessWidget {
@@ -19,7 +19,7 @@ class SenderSection extends StatelessWidget {
           thickness: 1.h,
           indent: 16.w,
         ),
-        const CategoryWidget(),
+        const CategorySection(),
       ],
     );
   }

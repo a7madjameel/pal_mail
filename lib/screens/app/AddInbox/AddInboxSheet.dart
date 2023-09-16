@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pal_mail/screens/app/Activity/ActivitySection.dart';
 import 'package:pal_mail/screens/app/AddImage/AddImageSection.dart';
 import 'package:pal_mail/screens/app/Decision/DecisionSection.dart';
-import 'package:pal_mail/screens/app/MailArchive/MailArchive.dart';
+import 'package:pal_mail/screens/app/MailArchive/MailArchiveSection.dart';
 import 'package:pal_mail/screens/app/MailTitle/MailTitle.dart';
 import 'package:pal_mail/screens/app/Status/StatusSection.dart';
 import 'package:pal_mail/screens/app/Tags/TagsSection.dart';
@@ -44,7 +44,7 @@ class _AddInboxSheetState extends State<AddInboxSheet> {
                 const MailTitle(),
                 //Mail Archive Section
                 SizedBox(height: 16.h),
-                const MailArchive(),
+                const MailArchiveSection(),
                 // tags Section
                 SizedBox(height: 20.h),
                 const TagsSection(),

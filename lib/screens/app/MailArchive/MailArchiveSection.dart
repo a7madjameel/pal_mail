@@ -4,8 +4,8 @@ import 'package:pal_mail/screens/app/MailArchive/ArchiveDateWidget.dart';
 import 'package:pal_mail/screens/app/MailArchive/ArchiveNumberWidget.dart';
 import 'package:pal_mail/widgets/my_section_container.dart';
 
-class MailArchive extends StatelessWidget {
-  const MailArchive({super.key});
+class MailArchiveSection extends StatelessWidget {
+  const MailArchiveSection({super.key});
 
   @override
   Widget build(BuildContext context) {

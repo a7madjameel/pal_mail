@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pal_mail/screens/app/Category/CategorySheet.dart';
 import 'package:pal_mail/widgets/MyTapWidget.dart';
 
-class CategoryWidget extends StatelessWidget {
-  const CategoryWidget({Key? key}) : super(key: key);
+class CategorySection extends StatelessWidget {
+  const CategorySection({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
