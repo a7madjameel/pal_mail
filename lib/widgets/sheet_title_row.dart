@@ -3,9 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SheetTitleRow extends StatelessWidget {
   final String title;
+  final Function()? onDonePressed;
   const SheetTitleRow({
     super.key,
     required this.title,
+    this.onDonePressed,
   });
 
   @override
@@ -31,7 +33,7 @@ class SheetTitleRow extends StatelessWidget {
           ),
         ),
         GestureDetector(
-          onTap: () => Navigator.pop(context),
+          onTap: onDonePressed,
           child: Text(
             'Done',
             style: TextStyle(

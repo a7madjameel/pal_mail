@@ -31,7 +31,7 @@ class _SenderWidgetState extends State<SenderWidget> {
   Widget build(BuildContext context) {
     return Consumer<SenderProvider>(builder: (context, value, _) {
       return MyTextField(
-        controller: _controller..text = value.getData(),
+        controller: _controller..text = value.getData() ?? '',
         hint: 'Sender',
         hintStyle: TextStyle(fontSize: 16.sp),
         onSubmit: (x) {
