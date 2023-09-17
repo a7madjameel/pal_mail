@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pal_mail/providers/TitleAndDescriptionProvider.dart';
 import 'package:pal_mail/widgets/MyTextField.dart';
 import 'package:pal_mail/widgets/my_section_container.dart';
+import 'package:provider/provider.dart';
 
 class MailTitle extends StatefulWidget {
   const MailTitle({super.key});
@@ -29,34 +31,37 @@ class _MailTitleState extends State<MailTitle> {
 
   @override
   Widget build(BuildContext context) {
-    return MySectionContainer(
-      children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8.w),
-          child: MyTextField(
-            controller: _titleController,
-            hint: 'Title of mail',
-            hintStyle: TextStyle(
-              fontSize: 20.sp,
-              fontWeight: FontWeight.w600,
+    return Consumer<TitleAndDescriptionProvider>(
+        builder: (context, titleProv, _) {
+      return MySectionContainer(
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8.w),
+            child: MyTextField(
+              controller: _titleController,
+              hint: 'Title of mail',
+              hintStyle: TextStyle(
+                fontSize: 20.sp,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
-        ),
-        Divider(
-          height: 10.h,
-          indent: 8.w,
-          thickness: 1.h,
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8.w),
-          child: MyTextField(
-            controller: _descriptionController,
-            hint: 'Description',
-            minLines: 1,
-            maxLines: 5,
+          Divider(
+            height: 10.h,
+            indent: 8.w,
+            thickness: 1.h,
           ),
-        ),
-      ],
-    );
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8.w),
+            child: MyTextField(
+              controller: _descriptionController,
+              hint: 'Description',
+              minLines: 1,
+              maxLines: 5,
+            ),
+          ),
+        ],
+      );
+    });
   }
 }

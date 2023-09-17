@@ -1,8 +1,11 @@
-import 'package:pal_mail/providers/Provider.dart';
+import 'package:flutter/cupertino.dart';
 
-class SenderProvider extends Provider {
-  @override
-  void setData(value) {
-    super.setData(value);
+import '../models/user_data.dart';
+
+class SenderProvider extends ChangeNotifier {
+  String? sender;
+  void setData(String? senderName, {User? senderUser}) {
+    sender = senderName;
+    notifyListeners();
   }
 }

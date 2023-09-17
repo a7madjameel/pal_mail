@@ -1,18 +1,23 @@
-import 'package:pal_mail/providers/Provider.dart';
+import 'package:flutter/cupertino.dart';
 
-class CategoryProvider extends Provider {
+class CategoryProvider extends ChangeNotifier {
   List items = [
     'Official organization',
     'NGOs',
     'UnBorder',
     'Others',
   ];
-  @override
-  getData() {
+  int? data;
+  String getData() {
     if (data == null) {
       return items[items.length - 1];
     }
-    return items[data];
+    return items[data!];
+  }
+
+  setData(int index) {
+    data = index;
+    notifyListeners();
   }
 
   getIndex() {

@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pal_mail/pref/shared_pref_controller.dart';
 import 'package:pal_mail/providers/CategoryProvider.dart';
 import 'package:pal_mail/providers/SenderProvider.dart';
+import 'package:pal_mail/providers/TitleAndDescriptionProvider.dart';
 import 'package:pal_mail/screens/app/home/home_screen.dart';
 import 'package:pal_mail/screens/auth/auth_tab_bar.dart';
 import 'package:pal_mail/screens/splash_screen.dart';
@@ -16,6 +17,7 @@ void main() async {
     providers: [
       ChangeNotifierProvider(create: (_) => SenderProvider()),
       ChangeNotifierProvider(create: (_) => CategoryProvider()),
+      ChangeNotifierProvider(create: (_) => TitleAndDescriptionProvider()),
     ],
     child: const MyApp(),
   ));
