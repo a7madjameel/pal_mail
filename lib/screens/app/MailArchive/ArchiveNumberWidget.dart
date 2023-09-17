@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pal_mail/providers/ArchiveProvider.dart';
+import 'package:provider/provider.dart';
 
 import '../../../widgets/MyTextField.dart';
 import 'MyArchiveItem.dart';
@@ -27,19 +29,22 @@ class _ArchiveNumberWidgetState extends State<ArchiveNumberWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return MyArchiveItem(
-      title: 'Archive Number',
-      image: 'archive_icon.svg',
-      subWidget: SizedBox(
-        width: 300.w,
-        height: 24.h,
-        child: MyTextField(
-          controller: _controller,
-          hint: '2022/6019',
-          keyboardType: TextInputType.number,
-          hintStyle: TextStyle(fontSize: 12.sp),
+    return Consumer<ArchiveProvider>(builder: (context, archProv, _) {
+      return MyArchiveItem(
+        title: 'Archive Number',
+        image: 'archive_icon.svg',
+        subWidget: SizedBox(
+          width: 300.w,
+          height: 24.h,
+          child: MyTextField(
+            controller: _controller,
+            onSubmit: (value) => archProv.setArchiveNum(_controller.text),
+            hint: '2022/6019',
+            keyboardType: TextInputType.number,
+            hintStyle: TextStyle(fontSize: 12.sp),
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

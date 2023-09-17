@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pal_mail/pref/shared_pref_controller.dart';
+import 'package:pal_mail/providers/ArchiveProvider.dart';
 import 'package:pal_mail/providers/CategoryProvider.dart';
 import 'package:pal_mail/providers/SenderProvider.dart';
 import 'package:pal_mail/providers/TitleAndDescriptionProvider.dart';
@@ -18,6 +19,7 @@ void main() async {
       ChangeNotifierProvider(create: (_) => SenderProvider()),
       ChangeNotifierProvider(create: (_) => CategoryProvider()),
       ChangeNotifierProvider(create: (_) => TitleAndDescriptionProvider()),
+      ChangeNotifierProvider(create: (_) => ArchiveProvider()),
     ],
     child: const MyApp(),
   ));
