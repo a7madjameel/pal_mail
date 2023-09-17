@@ -4,10 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class SheetTitleRow extends StatelessWidget {
   final String title;
   final Function()? onDonePressed;
+  final Function()? onCancelPressed;
   const SheetTitleRow({
     super.key,
     required this.title,
     this.onDonePressed,
+    this.onCancelPressed,
   });
 
   @override
@@ -16,7 +18,7 @@ class SheetTitleRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         GestureDetector(
-          onTap: () => Navigator.pop(context),
+          onTap: onCancelPressed ?? () => Navigator.pop(context),
           child: Text(
             'Cancel',
             style: TextStyle(

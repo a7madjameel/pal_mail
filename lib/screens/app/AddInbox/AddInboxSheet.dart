@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pal_mail/providers/ResetProvidersOnCancelClicked.dart';
 import 'package:pal_mail/screens/app/Activity/ActivitySection.dart';
 import 'package:pal_mail/screens/app/AddImage/AddImageSection.dart';
 import 'package:pal_mail/screens/app/Decision/DecisionSection.dart';
@@ -35,7 +36,14 @@ class _AddInboxSheetState extends State<AddInboxSheet> {
               children: [
                 SizedBox(height: 14.h),
                 //Sheet title
-                const SheetTitleRow(title: 'New Inbox'),
+                SheetTitleRow(
+                  title: 'New Inbox',
+                  onCancelPressed: () {
+                    ResetProvidersOnCancelClicked()
+                        .resetProvidersOnCancelClicked(context);
+                    Navigator.pop(context);
+                  },
+                ),
                 //Sender section
                 SizedBox(height: 16.h),
                 const SenderSection(),

@@ -15,7 +15,7 @@ class CategoryProvider extends ChangeNotifier {
     return items[data!];
   }
 
-  setData(int index) {
+  setData(int? index) {
     data = index;
     notifyListeners();
   }
