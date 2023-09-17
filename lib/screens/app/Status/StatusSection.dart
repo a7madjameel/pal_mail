@@ -55,7 +55,9 @@ class _StatusSectionState extends State<StatusSection> {
                 label: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
                   child: Text(
-                    statusProv.statusList[statusProv.selectedStatus ?? 0].name!,
+                    statusProv
+                            .statusList[statusProv.selectedStatus ?? 0].name ??
+                        '',
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w600,
@@ -63,7 +65,11 @@ class _StatusSectionState extends State<StatusSection> {
                     ),
                   ),
                 ),
-                backgroundColor: const Color(0xffFA3A57)),
+                backgroundColor: Color(
+                  int.parse(statusProv
+                          .statusList[statusProv.selectedStatus ?? 0].color ??
+                      '123123'),
+                )),
             const Spacer(),
             Icon(
               Icons.arrow_forward_ios,

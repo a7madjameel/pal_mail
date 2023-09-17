@@ -25,8 +25,9 @@ class StatusListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color color = Color(int.parse(status.color ?? '', radix: 16) + 0xFF000000);
     return Consumer<StatusProvider>(builder: (context, statusProv, _) {
+      Color color =
+          Color(int.parse(statusProv.statusList[itemIndex].color ?? '123123'));
       return MyTapWidget(
         onTap: onTap,
         child: Row(

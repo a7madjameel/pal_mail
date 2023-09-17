@@ -4,11 +4,15 @@ import 'package:pal_mail/providers/SenderProvider.dart';
 import 'package:pal_mail/providers/StatusProvider.dart';
 import 'package:provider/provider.dart';
 
-class ResetProvidersOnCancelClicked {
+class ProvidersManager {
   void resetProvidersOnCancelClicked(context) {
     Provider.of<SenderProvider>(context, listen: false).setData('');
     Provider.of<ActivityProvider>(context, listen: false).resetActivity();
     Provider.of<StatusProvider>(context, listen: false).setSelectedStatus(null);
     Provider.of<CategoryProvider>(context, listen: false).setData(null);
+  }
+
+  Future<void> initProviders(context) async {
+    await Provider.of<StatusProvider>(context, listen: false).initList();
   }
 }

@@ -1,16 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pal_mail/providers/ResetProvidersOnCancelClicked.dart';
-import 'package:pal_mail/screens/app/Activity/ActivitySection.dart';
-import 'package:pal_mail/screens/app/AddImage/AddImageSection.dart';
-import 'package:pal_mail/screens/app/Decision/DecisionSection.dart';
-import 'package:pal_mail/screens/app/MailArchive/MailArchiveSection.dart';
-import 'package:pal_mail/screens/app/MailTitle/MailTitle.dart';
-import 'package:pal_mail/screens/app/Status/StatusSection.dart';
-import 'package:pal_mail/screens/app/Tags/TagsSection.dart';
-import 'package:pal_mail/widgets/sheet_title_row.dart';
+import 'package:pal_mail/screens/app/AddInbox/AddInboxListView.dart';
+import 'package:pal_mail/widgets/LoadingTheView.dart';
 
-import '../Sender/SenderSection.dart';
+import '../../../providers/ProvidersManager.dart';
 
 class AddInboxSheet extends StatefulWidget {
   final ScrollController scrollController;
@@ -21,59 +13,25 @@ class AddInboxSheet extends StatefulWidget {
 }
 
 class _AddInboxSheetState extends State<AddInboxSheet> {
+  bool loading = true;
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  Future<void> init() async {
+    await ProvidersManager()
+        .initProviders(context)
+        .then((value) => setState(() => loading = false));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        shrinkWrap: true,
-        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        controller: widget.scrollController,
-        children: [
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            color: Theme.of(context).scaffoldBackgroundColor,
-            child: Column(
-              children: [
-                SizedBox(height: 14.h),
-                //Sheet title
-                SheetTitleRow(
-                  title: 'New Inbox',
-                  onCancelPressed: () {
-                    ResetProvidersOnCancelClicked()
-                        .resetProvidersOnCancelClicked(context);
-                    Navigator.pop(context);
-                  },
-                ),
-                //Sender section
-                SizedBox(height: 16.h),
-                const SenderSection(),
-                //Mail title section
-                SizedBox(height: 16.h),
-                const MailTitle(),
-                //Mail Archive Section
-                SizedBox(height: 16.h),
-                const MailArchiveSection(),
-                // tags Section
-                SizedBox(height: 20.h),
-                const TagsSection(),
-                //Status Section
-                SizedBox(height: 16.h),
-                const StatusSection(),
-                //Decision Section
-                SizedBox(height: 16.h),
-                const DecisionSection(),
-                //Add image section
-                SizedBox(height: 16.h),
-                const AddImageSection(),
-                //Activity section
-                SizedBox(height: 16.h),
-                const ActivitySection(),
-                SizedBox(height: 32.h),
-              ],
-            ),
-          ),
-        ],
-      ),
+      body: loading
+          ? const LoadingView()
+          : AddInboxListView(scrollController: widget.scrollController),
     );
   }
 }
