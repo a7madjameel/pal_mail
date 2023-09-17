@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pal_mail/pref/shared_pref_controller.dart';
+import 'package:pal_mail/providers/ActivityProvider.dart';
 import 'package:pal_mail/providers/ArchiveProvider.dart';
 import 'package:pal_mail/providers/CategoryProvider.dart';
+import 'package:pal_mail/providers/DecisionProvider.dart';
 import 'package:pal_mail/providers/SenderProvider.dart';
 import 'package:pal_mail/providers/StatusProvider.dart';
 import 'package:pal_mail/providers/TitleAndDescriptionProvider.dart';
@@ -22,6 +24,8 @@ void main() async {
       ChangeNotifierProvider(create: (_) => TitleAndDescriptionProvider()),
       ChangeNotifierProvider(create: (_) => ArchiveProvider()),
       ChangeNotifierProvider(create: (_) => StatusProvider()),
+      ChangeNotifierProvider(create: (_) => ActivityProvider()),
+      ChangeNotifierProvider(create: (_) => DecisionProvider()),
     ],
     child: const MyApp(),
   ));

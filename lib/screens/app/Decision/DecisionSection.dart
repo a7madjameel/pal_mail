@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pal_mail/providers/DecisionProvider.dart';
+import 'package:provider/provider.dart';
 
 import '../../../widgets/MyTextField.dart';
 import '../../../widgets/my_section_container.dart';
@@ -27,22 +29,25 @@ class _DecisionSectionState extends State<DecisionSection> {
 
   @override
   Widget build(BuildContext context) {
-    return MySectionContainer(
-      children: [
-        Text(
-          'Decision',
-          style: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w600,
+    return Consumer<DecisionProvider>(builder: (context, provider, _) {
+      return MySectionContainer(
+        children: [
+          Text(
+            'Decision',
+            style: TextStyle(
+              fontSize: 18.sp,
+              fontWeight: FontWeight.w600,
+            ),
           ),
-        ),
-        MyTextField(
-          controller: _decisionController,
-          hint: 'Add Decision…',
-          minLines: 1,
-          maxLines: 5,
-        ),
-      ],
-    );
+          MyTextField(
+            controller: _decisionController,
+            hint: 'Add Decision…',
+            minLines: 1,
+            onSubmit: (value) => provider.setDecision(value),
+            maxLines: 5,
+          ),
+        ],
+      );
+    });
   }
 }
