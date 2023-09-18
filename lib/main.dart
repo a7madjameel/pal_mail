@@ -6,6 +6,7 @@ import 'package:pal_mail/providers/ActivityProvider.dart';
 import 'package:pal_mail/providers/ArchiveProvider.dart';
 import 'package:pal_mail/providers/CategoryProvider.dart';
 import 'package:pal_mail/providers/DecisionProvider.dart';
+import 'package:pal_mail/providers/ImageProvider.dart';
 import 'package:pal_mail/providers/SenderProvider.dart';
 import 'package:pal_mail/providers/StatusProvider.dart';
 import 'package:pal_mail/providers/TitleAndDescriptionProvider.dart';
@@ -26,6 +27,7 @@ void main() async {
       ChangeNotifierProvider(create: (_) => StatusProvider()),
       ChangeNotifierProvider(create: (_) => ActivityProvider()),
       ChangeNotifierProvider(create: (_) => DecisionProvider()),
+      ChangeNotifierProvider(create: (_) => ImagesProvider()),
     ],
     child: const MyApp(),
   ));

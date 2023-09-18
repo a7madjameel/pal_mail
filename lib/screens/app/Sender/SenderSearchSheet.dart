@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pal_mail/models/user_data.dart';
+import 'package:pal_mail/controllers/CategoryController.dart';
+import 'package:pal_mail/models/Categories.dart';
 import 'package:pal_mail/providers/SenderProvider.dart';
 import 'package:pal_mail/widgets/MyTextField.dart';
 import 'package:pal_mail/widgets/sheet_title_row.dart';
@@ -30,12 +31,16 @@ class _SenderSearchSheetState extends State<SenderSearchSheet> {
   void dispose() {
     super.dispose();
     _controller.dispose();
+    data = getData();
+  }
+
+  Future<List<Categories>?>? data;
+  Future<List<Categories>?> getData() async {
+    return await CategoryController().getAllCategories();
   }
 
   @override
   Widget build(BuildContext context) {
-    List<User> searchedUsers =
-        List.generate(10, (index) => User(name: 'Sender 1'));
     return SingleChildScrollView(
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 20.w),
@@ -74,14 +79,37 @@ class _SenderSearchSheetState extends State<SenderSearchSheet> {
                       _controller.text.isEmpty ? '' : '"${_controller.text}"'));
             }),
             Divider(height: 28.h, thickness: 1.h),
-            ListView.separated(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) =>
-                  SearchedUserListTile(user: searchedUsers[index]),
-              separatorBuilder: (context, index) =>
-                  Divider(height: 28.h, thickness: 1.h),
-              itemCount: searchedUsers.length,
+            FutureBuilder(
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return ListView.separated(
+                    itemBuilder: (context, index) {
+                      var category = snapshot.data![0].categories?[index];
+                      return Column(
+                        children: [
+                          Text(category?.name ?? ''),
+                          ListView.separated(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) =>
+                                SearchedUserListTile(
+                              user: category?.senders?[index].name ?? '',
+                            ),
+                            separatorBuilder: (context, index) =>
+                                Divider(height: 28.h, thickness: 1.h),
+                            itemCount: category?.sendersCount as int,
+                          ),
+                        ],
+                      );
+                    },
+                    separatorBuilder: (context, index) =>
+                        Divider(height: 28.h, thickness: 1.h),
+                    itemCount: snapshot.data?.length ?? 0,
+                  );
+                }
+                return const CircularProgressIndicator();
+              },
+              future: data,
             )
           ],
         ),

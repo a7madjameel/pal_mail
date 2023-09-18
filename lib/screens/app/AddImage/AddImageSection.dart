@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pal_mail/widgets/MyTapWidget.dart';
-import 'package:pal_mail/widgets/my_section_container.dart';
+import 'package:pal_mail/core/helper/ImagePickerHelper.dart';
+import 'package:pal_mail/screens/app/AddImage/AddImagesWidget.dart';
+import 'package:provider/provider.dart';
+
+import '../../../providers/ImageProvider.dart';
+import 'ShowImages.dart';
 
 class AddImageSection extends StatefulWidget {
   const AddImageSection({super.key});
@@ -10,21 +13,14 @@ class AddImageSection extends StatefulWidget {
   State<AddImageSection> createState() => _AddImageSectionState();
 }
 
-class _AddImageSectionState extends State<AddImageSection> {
+class _AddImageSectionState extends State<AddImageSection>
+    with ImagePickerHelper {
   @override
   Widget build(BuildContext context) {
-    return MyTapWidget(
-      onTap: () {},
-      child: MySectionContainer(
-        verticalContainer: false,
-        children: [
-          Text(
-            'Add Image',
-            style: TextStyle(
-                fontSize: 16.sp, color: Theme.of(context).colorScheme.primary),
-          ),
-        ],
-      ),
-    );
+    return Consumer<ImagesProvider>(builder: (context, imageProv, _) {
+      return imageProv.images == [] || imageProv.images.isEmpty
+          ? const AddImageWidget()
+          : const ShowImages();
+    });
   }
 }
