@@ -1,58 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pal_mail/screens/app/AddInbox/AddInboxListView.dart';
+import 'package:pal_mail/widgets/LoadingTheView.dart';
+
+import '../../../providers/ProvidersManager.dart';
 
 class AddInboxSheet extends StatefulWidget {
-  const AddInboxSheet({super.key});
+  final ScrollController scrollController;
+  const AddInboxSheet({super.key, required this.scrollController});
 
   @override
   State<AddInboxSheet> createState() => _AddInboxSheetState();
 }
 
 class _AddInboxSheetState extends State<AddInboxSheet> {
+  bool loading = true;
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  Future<void> init() async {
+    await ProvidersManager()
+        .initProviders(context)
+        .then((value) => setState(() => loading = false));
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Theme.of(context).scaffoldBackgroundColor,
-      child: Column(
-        children: [
-          SizedBox(height: 14.h),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                GestureDetector(
-                  onTap: () => Navigator.pop(context),
-                  child: Text(
-                    'Cancel',
-                    style: TextStyle(
-                      fontSize: 18.sp,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                  ),
-                ),
-                Text(
-                  'New Inbox',
-                  style: TextStyle(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () => Navigator.pop(context),
-                  child: Text(
-                    'Done',
-                    style: TextStyle(
-                      fontSize: 18.sp,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+    return Scaffold(
+      body: loading
+          ? const LoadingView()
+          : AddInboxListView(scrollController: widget.scrollController),
     );
   }
 }
