@@ -9,6 +9,7 @@ import 'package:pal_mail/providers/DecisionProvider.dart';
 import 'package:pal_mail/providers/ImageProvider.dart';
 import 'package:pal_mail/providers/SenderProvider.dart';
 import 'package:pal_mail/providers/StatusProvider.dart';
+import 'package:pal_mail/providers/TagsProvider.dart';
 import 'package:pal_mail/providers/TitleAndDescriptionProvider.dart';
 import 'package:pal_mail/screens/app/home/home_screen.dart';
 import 'package:pal_mail/screens/auth/auth_tab_bar.dart';
@@ -28,6 +29,7 @@ void main() async {
       ChangeNotifierProvider(create: (_) => ActivityProvider()),
       ChangeNotifierProvider(create: (_) => DecisionProvider()),
       ChangeNotifierProvider(create: (_) => ImagesProvider()),
+      ChangeNotifierProvider(create: (_) => TagsProvider()),
     ],
     child: const MyApp(),
   ));
