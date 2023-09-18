@@ -41,6 +41,12 @@ class _AddInboxListViewState extends State<AddInboxListView> {
                   ProvidersManager().resetProvidersOnCancelClicked(context);
                   Navigator.pop(context);
                 },
+                onDonePressed: () {
+                 var validation =  ProvidersManager().validateProviders(context);
+                 if (validation) {
+                   Navigator.pop(context);
+                 }
+                },
               ),
               //Sender section
               SizedBox(height: 16.h),

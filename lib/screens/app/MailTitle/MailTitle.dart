@@ -44,7 +44,7 @@ class _MailTitleState extends State<MailTitle> {
                 fontSize: 20.sp,
                 fontWeight: FontWeight.w600,
               ),
-              onSubmit: (value) => titleProv.setTitle(_titleController.text),
+              onChange: (value) => titleProv.setTitle(_titleController.text),
             ),
           ),
           Divider(
@@ -59,7 +59,7 @@ class _MailTitleState extends State<MailTitle> {
               hint: 'Description',
               minLines: 1,
               maxLines: 5,
-              onSubmit: (value) =>
+              onChange: (value) =>
                   titleProv.setDescription(_descriptionController.text),
             ),
           ),

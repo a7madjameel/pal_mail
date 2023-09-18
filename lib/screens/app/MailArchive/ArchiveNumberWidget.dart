@@ -38,7 +38,7 @@ class _ArchiveNumberWidgetState extends State<ArchiveNumberWidget> {
           height: 24.h,
           child: MyTextField(
             controller: _controller,
-            onSubmit: (value) => archProv.setArchiveNum(_controller.text),
+            onChange: (value) => archProv.setArchiveNum(_controller.text),
             hint: '2022/6019',
             keyboardType: TextInputType.number,
             hintStyle: TextStyle(fontSize: 12.sp),

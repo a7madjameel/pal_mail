@@ -34,7 +34,7 @@ class _SenderWidgetState extends State<SenderWidget> {
         controller: _controller..text = value.sender ?? '',
         hint: 'Sender',
         hintStyle: TextStyle(fontSize: 16.sp),
-        onSubmit: (x) {
+        onChange: (x) {
           value.setData(x);
         },
         leadingWidget: const Icon(Icons.person_outline),
