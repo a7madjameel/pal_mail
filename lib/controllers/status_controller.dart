@@ -3,14 +3,16 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:pal_mail/api/api_controller.dart';
 
-import '../core/utils/constants.dart';
 import '../models/Status.dart';
+import '../pref/shared_pref_controller.dart';
 
 class StatusController {
   Future<List<Status>> getAllStatues() async {
     Uri uri = Uri.parse(ApiController.statuses);
+    var t = await SharedPrefController().getValueFor(key: PrefKeys.token.name);
+
     var response = await http.get(uri, headers: {
-      'Authorization': 'Bearer $token',
+      'Authorization': 'Bearer $t',
     });
     print(response.body);
     print(response.statusCode);

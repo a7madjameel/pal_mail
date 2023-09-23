@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:pal_mail/models/user_data.dart';
 import 'package:pal_mail/pref/shared_pref_controller.dart';
 
 import '../models/ActivityModel.dart';
@@ -10,11 +11,11 @@ class ActivityProvider extends ChangeNotifier {
     DateTime date = DateTime.now();
     String displayDate = DateFormat('d MMM yyyy').format(date).toString();
     activities = activities.reversed.toList();
-    var senderName =
-        await SharedPrefController().getValueFor(key: PrefKeys.user.name);
+    var senderName = userFromJson(
+        await SharedPrefController().getValueFor(key: PrefKeys.user.name));
     activities.add(ActivityModel(
         formattedTimeOfActivity: displayDate,
-        senderName: senderName,
+        senderName: senderName.user?.name ?? '',
         activityContent: content));
     activities = activities.reversed.toList();
     notifyListeners();
