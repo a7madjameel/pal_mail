@@ -7,8 +7,7 @@ import '../../../models/tags.dart';
 
 class TagItem extends StatelessWidget {
   final TagItemModel tag;
-  final int index;
-  const TagItem({required this.index, required this.tag, super.key});
+  const TagItem({required this.tag, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +15,8 @@ class TagItem extends StatelessWidget {
       return GestureDetector(
         onTap: () {
           tag.selected!
-              ? tagsProv.deSelectTag(index)
-              : tagsProv.selectTag(index);
+              ? tagsProv.deSelectTag(tag.tag?.id ?? 0)
+              : tagsProv.selectTag(tag.tag?.id ?? 0);
         },
         child: Container(
           margin: EdgeInsetsDirectional.only(end: 9.w, bottom: 8.h),

@@ -16,8 +16,6 @@ class TagsController {
     var response = await http.get(uri, headers: {
       HttpHeaders.authorizationHeader: token,
     });
-    print(response.body);
-    print(response.statusCode);
     if (response.statusCode == 200) {
       var jsonResponse = jsonDecode(response.body);
       var jsonArray = jsonResponse['tags'] as List;

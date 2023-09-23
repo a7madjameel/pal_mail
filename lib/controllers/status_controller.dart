@@ -14,8 +14,6 @@ class StatusController {
     var response = await http.get(uri, headers: {
       'Authorization': 'Bearer $t',
     });
-    print(response.body);
-    print(response.statusCode);
     if (response.statusCode == 200) {
       var jsonResponse = jsonDecode(response.body);
       var jsonArray = jsonResponse['statuses'] as List<dynamic>;

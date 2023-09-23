@@ -28,6 +28,7 @@ class ProvidersManager with Helper {
 
   Future<void> initProviders(context) async {
     await Provider.of<StatusProvider>(context, listen: false).initList();
+    await Provider.of<TagsProvider>(context, listen: false).initList();
   }
 
   bool validateProviders(context) {

@@ -28,9 +28,8 @@ class _TagsListState extends State<TagsList> {
                   children: List.generate(
                     tagsProv.allTags.length,
                     (index) => TagItem(
-                      index: index,
                       tag: TagItemModel(
-                        tag: Tag(name: tagsProv.allTags[index]),
+                        tag: tagsProv.allTags[index],
                         selected: tagsProv.selectedTags
                             .contains(tagsProv.allTags[index]),
                       ),

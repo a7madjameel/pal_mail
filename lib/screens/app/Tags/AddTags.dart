@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pal_mail/models/tags.dart';
 import 'package:pal_mail/providers/TagsProvider.dart';
 import 'package:pal_mail/widgets/MyTextField.dart';
 import 'package:pal_mail/widgets/my_section_container.dart';
@@ -35,7 +36,10 @@ class _AddTagsState extends State<AddTags> {
           hint: 'Add New Tag…',
           hintStyle: TextStyle(fontSize: 14.sp),
           onSubmit: (value) {
-            tagsProv.addToTags(value);
+            tagsProv.addToTags(Tag(
+                name: value,
+                id: tagsProv.allTags.length,
+                createdAt: DateTime.now()));
             _controller.clear();
           },
         ),

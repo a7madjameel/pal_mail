@@ -1,21 +1,27 @@
 import 'package:flutter/cupertino.dart';
+import 'package:pal_mail/controllers/tags_controller.dart';
+import 'package:pal_mail/models/tags.dart';
 
 class TagsProvider extends ChangeNotifier {
-  List selectedTags = [];
-  List allTags = [];
-  void addToTags(String tag) {
+  List<Tag> selectedTags = [];
+  List<Tag> allTags = [];
+  void addToTags(Tag tag) {
     allTags.add(tag);
     selectedTags.add(tag);
     notifyListeners();
   }
 
-  void deSelectTag(int index) {
-    selectedTags.removeAt(index);
+  Future<void> initList() async {
+    allTags = await TagsController().getAllTags();
+  }
+
+  void deSelectTag(int id) {
+    selectedTags.removeWhere((element) => element.id == id);
     notifyListeners();
   }
 
-  void selectTag(int index) {
-    selectedTags.add(allTags[index]);
+  void selectTag(int id) {
+    selectedTags.add(allTags.where((element) => element.id == id).first);
     notifyListeners();
   }
 
