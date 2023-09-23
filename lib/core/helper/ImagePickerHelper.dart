@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:image_picker/image_picker.dart';
-import 'package:pal_mail/providers/ImageProvider.dart';
+import 'package:pal_mail/providers/imageProvider.dart';
 import 'package:provider/provider.dart';
 
 mixin ImagePickerHelper {

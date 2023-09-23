@@ -16,6 +16,8 @@ class ApiController {
   static const String tags = "${_baseUrl}tags";
   //****************************************************************************
   //Status Uri
-  static const String statuses = "${_baseUrl}statuses?mail=false";
+  static const String statuses = "${_baseUrl}statuses?mail=true";
   static const String categories = "${_baseUrl}categories";
+  //****************************************************************************
+  static const String mails = '${_baseUrl}mails';
 }

@@ -1,51 +1,9 @@
-class AllStatuses {
-  List<Statuses>? statuses;
-
-  AllStatuses({this.statuses});
-
-  AllStatuses.fromJson(Map<String, dynamic> json) {
-    if (json['statuses'] != null) {
-      statuses = <Statuses>[];
-      json['statuses'].forEach((v) {
-        statuses!.add(Statuses.fromJson(v));
-      });
-    }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (statuses != null) {
-      data['statuses'] = statuses!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
-
-class Statuses {
-  int? id;
-  String? name;
-  String? color;
-  String? createdAt;
-  String? updatedAt;
-  String? mailsCount;
+class Mail {
   List<Mails>? mails;
 
-  Statuses(
-      {this.id,
-        this.name,
-        this.color,
-        this.createdAt,
-        this.updatedAt,
-        this.mailsCount,
-        this.mails});
+  Mail({this.mails});
 
-  Statuses.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    color = json['color'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    mailsCount = json['mails_count'];
+  Mail.fromJson(Map<String, dynamic> json) {
     if (json['mails'] != null) {
       mails = <Mails>[];
       json['mails'].forEach((v) {
@@ -56,12 +14,6 @@ class Statuses {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['name'] = name;
-    data['color'] = color;
-    data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
-    data['mails_count'] = mailsCount;
     if (mails != null) {
       data['mails'] = mails!.map((v) => v.toJson()).toList();
     }
@@ -89,21 +41,21 @@ class Mails {
 
   Mails(
       {this.id,
-        this.subject,
-        this.description,
-        this.senderId,
-        this.archiveNumber,
-        this.archiveDate,
-        this.decision,
-        this.statusId,
-        this.finalDecision,
-        this.createdAt,
-        this.updatedAt,
-        this.sender,
-        this.status,
-        this.attachments,
-        this.activities,
-        this.tags});
+      this.subject,
+      this.description,
+      this.senderId,
+      this.archiveNumber,
+      this.archiveDate,
+      this.decision,
+      this.statusId,
+      this.finalDecision,
+      this.createdAt,
+      this.updatedAt,
+      this.sender,
+      this.status,
+      this.attachments,
+      this.activities,
+      this.tags});
 
   Mails.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -117,10 +69,8 @@ class Mails {
     finalDecision = json['final_decision'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    sender =
-    json['sender'] != null ? Sender.fromJson(json['sender']) : null;
-    status =
-    json['status'] != null ? Status.fromJson(json['status']) : null;
+    sender = json['sender'] != null ? Sender.fromJson(json['sender']) : null;
+    status = json['status'] != null ? Status.fromJson(json['status']) : null;
     if (json['attachments'] != null) {
       attachments = <Attachments>[];
       json['attachments'].forEach((v) {
@@ -185,13 +135,13 @@ class Sender {
 
   Sender(
       {this.id,
-        this.name,
-        this.mobile,
-        this.address,
-        this.categoryId,
-        this.createdAt,
-        this.updatedAt,
-        this.category});
+      this.name,
+      this.mobile,
+      this.address,
+      this.categoryId,
+      this.createdAt,
+      this.updatedAt,
+      this.category});
 
   Sender.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -201,9 +151,8 @@ class Sender {
     categoryId = json['category_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    category = json['category'] != null
-        ? Category.fromJson(json['category'])
-        : null;
+    category =
+        json['category'] != null ? Category.fromJson(json['category']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -225,18 +174,24 @@ class Sender {
 class Category {
   int? id;
   String? name;
+  String? createdAt;
+  String? updatedAt;
 
-  Category({this.id, this.name});
+  Category({this.id, this.name, this.createdAt, this.updatedAt});
 
   Category.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['name'] = name;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }
@@ -273,11 +228,11 @@ class Attachments {
 
   Attachments(
       {this.id,
-        this.title,
-        this.image,
-        this.mailId,
-        this.createdAt,
-        this.updatedAt});
+      this.title,
+      this.image,
+      this.mailId,
+      this.createdAt,
+      this.updatedAt});
 
   Attachments.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -289,7 +244,7 @@ class Attachments {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['title'] = title;
     data['image'] = image;
@@ -314,15 +269,15 @@ class Activities {
 
   Activities(
       {this.id,
-        this.body,
-        this.userId,
-        this.mailId,
-        this.sendNumber,
-        this.sendDate,
-        this.sendDestination,
-        this.createdAt,
-        this.updatedAt,
-        this.user});
+      this.body,
+      this.userId,
+      this.mailId,
+      this.sendNumber,
+      this.sendDate,
+      this.sendDestination,
+      this.createdAt,
+      this.updatedAt,
+      this.user});
 
   Activities.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -338,7 +293,7 @@ class Activities {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['body'] = body;
     data['user_id'] = userId;
@@ -367,13 +322,13 @@ class User {
 
   User(
       {this.id,
-        this.name,
-        this.email,
-        this.image,
-        this.emailVerifiedAt,
-        this.roleId,
-        this.createdAt,
-        this.updatedAt});
+      this.name,
+      this.email,
+      this.image,
+      this.emailVerifiedAt,
+      this.roleId,
+      this.createdAt,
+      this.updatedAt});
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
