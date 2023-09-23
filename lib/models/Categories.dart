@@ -1,6 +1,10 @@
+// To parse this JSON data, do
+//
+//     final categories = categoriesFromJson(jsonString);
+
 import 'dart:convert';
 
-Categories categoriesFromJson(String str, String? filterBy) =>
+Categories categoriesFromJson(String str) =>
     Categories.fromJson(json.decode(str));
 
 String categoriesToJson(Categories data) => json.encode(data.toJson());
@@ -15,9 +19,8 @@ class Categories {
   factory Categories.fromJson(Map<String, dynamic> json) => Categories(
         categories: json["categories"] == null
             ? []
-            : List<CategoryElement>.from(json["categories"]!.map((x) {
-                CategoryElement.fromJson(x);
-              })),
+            : List<CategoryElement>.from(
+                json["categories"]!.map((x) => CategoryElement.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -34,6 +37,7 @@ class CategoryElement {
   final DateTime? updatedAt;
   final String? sendersCount;
   final List<Sender>? senders;
+
   CategoryElement({
     this.id,
     this.name,
@@ -56,9 +60,8 @@ class CategoryElement {
         sendersCount: json["senders_count"],
         senders: json["senders"] == null
             ? []
-            : List<Sender>.from(json["senders"]!.map((x) {
-                Sender.fromJson(x);
-              })),
+            : List<Sender>.from(
+                json["senders"]!.map((x) => Sender.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {

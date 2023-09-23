@@ -7,7 +7,6 @@ class CategoryProvider extends ChangeNotifier {
     'UnBorder',
     'Others',
   ];
-
   int? data;
   String getData() {
     if (data == null) {

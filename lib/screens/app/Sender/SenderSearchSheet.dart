@@ -24,6 +24,8 @@ class _SenderSearchSheetState extends State<SenderSearchSheet> {
   @override
   void initState() {
     super.initState();
+    data = getData();
+
     _controller = TextEditingController();
   }
 
@@ -31,11 +33,10 @@ class _SenderSearchSheetState extends State<SenderSearchSheet> {
   void dispose() {
     super.dispose();
     _controller.dispose();
-    data = getData();
   }
 
-  Future<List<Categories>?>? data;
-  Future<List<Categories>?> getData() async {
+  Future<Categories>? data;
+  Future<Categories> getData() async {
     return await CategoryController().getAllCategories();
   }
 
@@ -83,28 +84,32 @@ class _SenderSearchSheetState extends State<SenderSearchSheet> {
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return ListView.separated(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      var category = snapshot.data![0].categories?[index];
+                      var category = snapshot.data!.categories?[index];
                       return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(category?.name ?? ''),
+                          Divider(height: 28.h, thickness: 1.h),
                           ListView.separated(
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) =>
                                 SearchedUserListTile(
-                              user: category?.senders?[index].name ?? '',
+                              user: category.senders?[index].name ?? '',
                             ),
                             separatorBuilder: (context, index) =>
                                 Divider(height: 28.h, thickness: 1.h),
-                            itemCount: category?.sendersCount as int,
+                            itemCount: int.parse(category!.sendersCount!),
                           ),
                         ],
                       );
                     },
                     separatorBuilder: (context, index) =>
                         Divider(height: 28.h, thickness: 1.h),
-                    itemCount: snapshot.data?.length ?? 0,
+                    itemCount: snapshot.data?.categories?.length ?? 0,
                   );
                 }
                 return const CircularProgressIndicator();
