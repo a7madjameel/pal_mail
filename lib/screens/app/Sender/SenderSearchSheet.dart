@@ -88,24 +88,33 @@ class _SenderSearchSheetState extends State<SenderSearchSheet> {
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       var category = snapshot.data!.categories?[index];
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(category?.name ?? ''),
-                          Divider(height: 28.h, thickness: 1.h),
-                          ListView.separated(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, index) =>
-                                SearchedUserListTile(
-                              user: category.senders?[index].name ?? '',
-                            ),
-                            separatorBuilder: (context, index) =>
+                      var senders = snapshot.data!.categories?[index].senders;
+                      if (_controller.text.isNotEmpty) {
+                        senders = senders
+                            ?.where((element) =>
+                                element.name!.contains(_controller.text))
+                            .toList();
+                      }
+                      return senders!.isEmpty
+                          ? const SizedBox.shrink()
+                          : Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(category?.name ?? ''),
                                 Divider(height: 28.h, thickness: 1.h),
-                            itemCount: int.parse(category!.sendersCount!),
-                          ),
-                        ],
-                      );
+                                ListView.separated(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemBuilder: (context, index) =>
+                                      SearchedUserListTile(
+                                    user: senders?[index].name ?? '',
+                                  ),
+                                  separatorBuilder: (context, index) =>
+                                      Divider(height: 28.h, thickness: 1.h),
+                                  itemCount: senders.length ?? 0,
+                                ),
+                              ],
+                            );
                     },
                     separatorBuilder: (context, index) =>
                         Divider(height: 28.h, thickness: 1.h),
