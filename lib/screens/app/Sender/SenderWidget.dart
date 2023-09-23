@@ -31,11 +31,12 @@ class _SenderWidgetState extends State<SenderWidget> {
   Widget build(BuildContext context) {
     return Consumer<SenderProvider>(builder: (context, value, _) {
       return MyTextField(
-        controller: _controller..text = value.sender ?? '',
+        controller: _controller
+          ..text = value.sender ?? value.senderFromAPI?.name ?? '',
         hint: 'Sender',
         hintStyle: TextStyle(fontSize: 16.sp),
         onChange: (x) {
-          value.setData(x);
+          value.setData(senderName: x, senderUser: null);
         },
         leadingWidget: const Icon(Icons.person_outline),
         trailingWidget: GestureDetector(

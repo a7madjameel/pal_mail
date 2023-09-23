@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pal_mail/controllers/CategoryController.dart';
 import 'package:pal_mail/models/Categories.dart';
 import 'package:pal_mail/providers/SenderProvider.dart';
+import 'package:pal_mail/widgets/MyTapWidget.dart';
 import 'package:pal_mail/widgets/MyTextField.dart';
 import 'package:pal_mail/widgets/sheet_title_row.dart';
 import 'package:provider/provider.dart';
@@ -69,15 +70,19 @@ class _SenderSearchSheetState extends State<SenderSearchSheet> {
                 ? Divider(height: 28.h, thickness: 1.h)
                 : const SizedBox.shrink(),
             Consumer<SenderProvider>(builder: (context, value, _) {
-              return GestureDetector(
+              return MyTapWidget(
                   onTap: () {
                     if (_controller.text.isNotEmpty) {
-                      value.setData(_controller.text);
+                      value.setData(senderName: _controller.text);
                       Navigator.pop(context);
                     }
                   },
-                  child: Text(
-                      _controller.text.isEmpty ? '' : '"${_controller.text}"'));
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Text(_controller.text.isEmpty
+                        ? ''
+                        : '"${_controller.text}"'),
+                  ));
             }),
             Divider(height: 28.h, thickness: 1.h),
             FutureBuilder(
@@ -107,11 +112,11 @@ class _SenderSearchSheetState extends State<SenderSearchSheet> {
                                   physics: const NeverScrollableScrollPhysics(),
                                   itemBuilder: (context, index) =>
                                       SearchedUserListTile(
-                                    user: senders?[index].name ?? '',
+                                    user: senders![index],
                                   ),
                                   separatorBuilder: (context, index) =>
                                       Divider(height: 28.h, thickness: 1.h),
-                                  itemCount: senders.length ?? 0,
+                                  itemCount: senders.length,
                                 ),
                               ],
                             );
@@ -121,7 +126,7 @@ class _SenderSearchSheetState extends State<SenderSearchSheet> {
                     itemCount: snapshot.data?.categories?.length ?? 0,
                   );
                 }
-                return const CircularProgressIndicator();
+                return const Center(child: CircularProgressIndicator());
               },
               future: data,
             )

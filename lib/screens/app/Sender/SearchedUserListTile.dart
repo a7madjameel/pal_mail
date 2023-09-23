@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pal_mail/models/Categories.dart';
 import 'package:pal_mail/providers/SenderProvider.dart';
 import 'package:provider/provider.dart';
 
 class SearchedUserListTile extends StatelessWidget {
-  final String user;
+  final Sender user;
   const SearchedUserListTile({required this.user, Key? key}) : super(key: key);
 
   @override
@@ -12,7 +13,7 @@ class SearchedUserListTile extends StatelessWidget {
     return Consumer<SenderProvider>(
       builder: (context, value, child) => InkWell(
         onTap: () {
-          value.setData(user);
+          value.setData(senderUser: user, senderName: null);
           Navigator.pop(context);
         },
         child: Row(
@@ -27,7 +28,7 @@ class SearchedUserListTile extends StatelessWidget {
               ),
             ),
             SizedBox(width: 8.w),
-            Text(user ?? ''),
+            Text(user.name ?? ''),
           ],
         ),
       ),

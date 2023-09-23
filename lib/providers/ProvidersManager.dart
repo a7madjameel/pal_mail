@@ -13,7 +13,8 @@ import '../core/helper/helper.dart';
 
 class ProvidersManager with Helper {
   void resetProvidersOnCancelClicked(context) {
-    Provider.of<SenderProvider>(context, listen: false).setData(null);
+    Provider.of<SenderProvider>(context, listen: false)
+        .setData(senderName: null, senderUser: null);
     Provider.of<ActivityProvider>(context, listen: false).resetActivity();
     Provider.of<StatusProvider>(context, listen: false).setSelectedStatus(null);
     Provider.of<CategoryProvider>(context, listen: false).setData(null);
