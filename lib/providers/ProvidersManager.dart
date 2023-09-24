@@ -9,9 +9,7 @@ import 'package:pal_mail/providers/TagsProvider.dart';
 import 'package:pal_mail/providers/TitleAndDescriptionProvider.dart';
 import 'package:provider/provider.dart';
 
-import '../core/helper/helper.dart';
-
-class ProvidersManager with Helper {
+class ProvidersManager {
   void resetProvidersOnCancelClicked(context) {
     Provider.of<SenderProvider>(context, listen: false)
         .setData(senderName: null, senderUser: null);
@@ -33,7 +31,13 @@ class ProvidersManager with Helper {
   }
 
   bool validateProviders(context) {
-    var sender = Provider.of<SenderProvider>(context, listen: false).sender;
+    var senderName = Provider.of<SenderProvider>(context, listen: false).sender;
+    var activties =
+        Provider.of<ActivityProvider>(context, listen: false).activities;
+    var images = Provider.of<ImagesProvider>(context, listen: false).images;
+    var tags = Provider.of<TagsProvider>(context, listen: false).selectedTags;
+    var senderUser =
+        Provider.of<SenderProvider>(context, listen: false).senderFromAPI;
     var title =
         Provider.of<TitleAndDescriptionProvider>(context, listen: false).title;
     var description =
@@ -41,23 +45,21 @@ class ProvidersManager with Helper {
             .description;
     var archiveNumber =
         Provider.of<ArchiveProvider>(context, listen: false).archiveNum;
+    var archiveDate = Provider.of<ArchiveProvider>(context, listen: false).date;
     var decision =
         Provider.of<DecisionProvider>(context, listen: false).decision;
+    int categoryID =
+        (Provider.of<CategoryProvider>(context, listen: false).data ?? 0) + 1;
+    int statusID =
+        (Provider.of<StatusProvider>(context, listen: false).selectedStatus ??
+                0) +
+            1;
 
-    if (sender == null ||
+    if ((senderUser == null && senderName == null) ||
         title == null ||
-        description == null ||
-        archiveNumber == null ||
-        decision == null) {
-      showSnackBar(context, message: 'Please enter valid data', success: false);
-      print(sender);
-      print(title);
-      print(description);
-      print(archiveNumber);
-      print(decision);
+        archiveNumber == null) {
       return false;
     } else {
-      showSnackBar(context, message: 'Inbox created successfully');
       resetProvidersOnCancelClicked(context);
       return true;
     }

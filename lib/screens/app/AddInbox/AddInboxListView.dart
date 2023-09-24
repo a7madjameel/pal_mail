@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../core/helper/helper.dart';
 import '../../../providers/ProvidersManager.dart';
 import '../../../widgets/sheet_title_row.dart';
 import '../Activity/ActivitySection.dart';
@@ -20,7 +21,7 @@ class AddInboxListView extends StatefulWidget {
   State<AddInboxListView> createState() => _AddInboxListViewState();
 }
 
-class _AddInboxListViewState extends State<AddInboxListView> {
+class _AddInboxListViewState extends State<AddInboxListView> with Helper {
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -42,10 +43,17 @@ class _AddInboxListViewState extends State<AddInboxListView> {
                   Navigator.pop(context);
                 },
                 onDonePressed: () {
-                 var validation =  ProvidersManager().validateProviders(context);
-                 if (validation) {
-                   Navigator.pop(context);
-                 }
+                  var validation =
+                      ProvidersManager().validateProviders(context);
+                  if (validation) {
+                    showSnackBar(context,
+                        message: 'Inbox created successfully');
+
+                    Navigator.pop(context);
+                  } else {
+                    showSnackBar(context,
+                        message: 'Please enter valid data', success: false);
+                  }
                 },
               ),
               //Sender section
