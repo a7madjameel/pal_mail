@@ -33,6 +33,7 @@ class _AuthTabBarState extends State<AuthTabBar> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: true,
       backgroundColor: const Color(0xffeeeeee),
       body: Stack(

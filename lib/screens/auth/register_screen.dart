@@ -95,6 +95,7 @@ class _RegisterScreenState extends State<RegisterScreen> with Helper {
             ),
             TextFormField(
               controller: _passwordController,
+              obscureText: true,
               validator: (value) {
                 if (value != null && value.isEmpty) {
                   return 'Please enter password';
@@ -115,6 +116,7 @@ class _RegisterScreenState extends State<RegisterScreen> with Helper {
             ),
             TextFormField(
               controller: _confirmPasswordController,
+              obscureText: true,
               validator: (value) {
                 if (value != null && value.isEmpty) {
                   return 'Please enter password';
