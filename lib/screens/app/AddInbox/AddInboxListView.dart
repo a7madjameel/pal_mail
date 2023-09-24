@@ -42,10 +42,10 @@ class _AddInboxListViewState extends State<AddInboxListView> with Helper {
                   ProvidersManager().resetProvidersOnCancelClicked(context);
                   Navigator.pop(context);
                 },
-                onDonePressed: () {
+                onDonePressed: () async {
                   var validation =
-                      ProvidersManager().validateProviders(context);
-                  if (validation) {
+                      await ProvidersManager().validateProviders(context);
+                  if (validation && mounted) {
                     showSnackBar(context,
                         message: 'Inbox created successfully');
 

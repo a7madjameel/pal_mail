@@ -1,3 +1,4 @@
+import 'package:pal_mail/controllers/AddInboxController.dart';
 import 'package:pal_mail/providers/ActivityProvider.dart';
 import 'package:pal_mail/providers/ArchiveProvider.dart';
 import 'package:pal_mail/providers/CategoryProvider.dart';
@@ -30,7 +31,7 @@ class ProvidersManager {
     await Provider.of<TagsProvider>(context, listen: false).initList();
   }
 
-  bool validateProviders(context) {
+  Future<bool> validateProviders(context) async {
     var senderName = Provider.of<SenderProvider>(context, listen: false).sender;
     var activties =
         Provider.of<ActivityProvider>(context, listen: false).activities;
@@ -48,7 +49,7 @@ class ProvidersManager {
     var archiveDate = Provider.of<ArchiveProvider>(context, listen: false).date;
     var decision =
         Provider.of<DecisionProvider>(context, listen: false).decision;
-    int categoryID =
+    int catID =
         (Provider.of<CategoryProvider>(context, listen: false).data ?? 0) + 1;
     int statusID =
         (Provider.of<StatusProvider>(context, listen: false).selectedStatus ??
@@ -61,7 +62,15 @@ class ProvidersManager {
       return false;
     } else {
       resetProvidersOnCancelClicked(context);
-      return true;
+      var res = await AddInboxController().addInboxToApi(
+          catID: catID,
+          statusID: statusID,
+          title: title,
+          archiveNum: archiveNumber,
+          archiveDate: archiveDate,
+          senderName: senderName,
+          senderUser: senderUser);
+      return res;
     }
   }
 }
