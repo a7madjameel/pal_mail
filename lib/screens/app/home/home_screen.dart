@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pal_mail/screens/app/AddInbox/AddInboxSheet.dart';
 import 'package:pal_mail/screens/app/home/search_screen.dart';
-
+import 'package:pal_mail/screens/app/testScreen/test_screen.dart';
 import '../../../controllers/auth_controller.dart';
 import '../../../controllers/status_controller.dart';
 import '../../../controllers/tags_controller.dart';
@@ -16,6 +16,7 @@ import '../../../models/Status.dart';
 import '../../../models/item.dart';
 import '../../../models/tags.dart';
 import '../../splash_screen.dart';
+
 
 class HomeScreen extends StatefulWidget {
   static String id = '/home_screen';

@@ -12,6 +12,7 @@ import 'package:pal_mail/providers/StatusProvider.dart';
 import 'package:pal_mail/providers/TagsProvider.dart';
 import 'package:pal_mail/providers/TitleAndDescriptionProvider.dart';
 import 'package:pal_mail/screens/app/home/home_screen.dart';
+import 'package:pal_mail/screens/app/home/search_screen.dart';
 import 'package:pal_mail/screens/auth/auth_tab_bar.dart';
 import 'package:pal_mail/screens/splash_screen.dart';
 import 'package:provider/provider.dart';
@@ -71,6 +72,7 @@ class MyApp extends StatelessWidget {
             SplashScreen.id: (context) => const SplashScreen(),
             AuthTabBar.id: (context) => const AuthTabBar(),
             HomeScreen.id: (context) => const HomeScreen(),
+            SearchScreen.id: (context) => const SearchScreen(),
           },
         );
       },

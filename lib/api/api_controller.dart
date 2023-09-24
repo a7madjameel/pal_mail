@@ -18,4 +18,8 @@ class ApiController {
   //Status Uri
   static const String statuses = "${_baseUrl}statuses?mail=false";
   static const String categories = "${_baseUrl}categories";
+  //****************************************************************************
+  // Search Uri
+  //static const String search = "${_baseUrl}search";
+
 }
