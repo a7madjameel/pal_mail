@@ -8,7 +8,9 @@ class TagsProvider extends ChangeNotifier {
   void addToTags(Tag tag) {
     allTags.add(tag);
     selectedTags.add(tag);
-    notifyListeners();
+    TagsController()
+        .createTag(tag.name!)
+        .then((value) => value ? notifyListeners() : null);
   }
 
   Future<void> initList() async {

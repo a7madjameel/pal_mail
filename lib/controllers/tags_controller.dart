@@ -23,4 +23,22 @@ class TagsController {
     }
     return [];
   }
+
+  Future<bool> createTag(String tagName) async {
+    var token =
+        await SharedPrefController().getValueFor(key: PrefKeys.token.name);
+    var res = await http.post(
+      Uri.parse(ApiController.tags),
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+      body: {
+        'name': tagName,
+      },
+    );
+    if (res.statusCode == 200 || res.statusCode == 201) {
+      return true;
+    }
+    return false;
+  }
 }
