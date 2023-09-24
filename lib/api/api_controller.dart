@@ -11,6 +11,7 @@ class ApiController {
   static const String updateUser = "${_baseUrl}user/update";
   static const String logout = "${_baseUrl}logout";
   static const String senders = "${_baseUrl}senders";
+  static const String mails = "${_baseUrl}mails";
 
   //****************************************************************************
   //Tags Uri

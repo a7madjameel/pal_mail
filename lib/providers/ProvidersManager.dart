@@ -61,15 +61,22 @@ class ProvidersManager {
         archiveNumber == null) {
       return false;
     } else {
-      resetProvidersOnCancelClicked(context);
       var res = await AddInboxController().addInboxToApi(
-          catID: catID,
-          statusID: statusID,
-          title: title,
-          archiveNum: archiveNumber,
-          archiveDate: archiveDate,
-          senderName: senderName,
-          senderUser: senderUser);
+        catID: catID,
+        statusID: statusID,
+        title: title,
+        archiveNum: archiveNumber,
+        archiveDate: archiveDate,
+        senderName: senderName,
+        senderUser: senderUser,
+        description: description,
+        activities: activties,
+        decision: decision,
+        tags: tags,
+      );
+      if (res) {
+        resetProvidersOnCancelClicked(context);
+      }
       return res;
     }
   }
