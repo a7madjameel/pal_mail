@@ -20,6 +20,7 @@ class _SearchScreenState extends State<SearchScreen> {
   bool isLoading = false;
   bool isZero = false;
   bool isSearching = false;
+  TextEditingController searchController = TextEditingController();
   getSearch(String text)async{
     try {
       setState(() {
@@ -68,6 +69,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   height: 45,
                   width: 340,
                   child: TextField(
+                    controller: searchController,
                     onChanged: (value) async{
                       setState(() {
                         searchValue = value;
@@ -93,6 +95,17 @@ class _SearchScreenState extends State<SearchScreen> {
                         borderSide: BorderSide.none,
                       ),
                       hintText: "search",
+                      suffixIcon: ClipOval(
+                        child: IconButton(
+                          icon: Icon(Icons.close,color: Colors.grey[700],),
+                          onPressed: () {
+                            setState(() {
+                               searchController.clear();
+                            });
+                        },
+                        ),
+                      )
+                      ,
                       hintStyle:  TextStyle(
                           color: Colors.grey[500],
                           fontSize: 20,
@@ -112,9 +125,9 @@ class _SearchScreenState extends State<SearchScreen> {
                 )
               ],
             ),
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
             //  some additions (Like without search) All Inboxes use (getSearch) Method
-            (isLoading&&isSearching)? CircularProgressIndicator()
+            (isLoading&&isSearching)? const CircularProgressIndicator()
                 :isZero? Text(
               'No mails found',
               textAlign: TextAlign.start,
@@ -140,3 +153,5 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 }
+
+
