@@ -16,9 +16,7 @@ class AuthController with Helper {
       'email': email,
       'password': password,
     });
-    //To check the operation in console we used print statement
-    print(response.body);
-    print(response.statusCode);
+
     if (response.statusCode == 200 || response.statusCode == 403) {
       if (response.statusCode == 200) {
         var json = jsonDecode(response.body);

@@ -12,6 +12,7 @@ class ApiController {
   static const String logout = "${_baseUrl}logout";
   static const String senders = "${_baseUrl}senders";
   static const String mails = "${_baseUrl}mails";
+  static const String attachments = "${_baseUrl}attachments";
 
   //****************************************************************************
   //Tags Uri

@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:http/http.dart' as http;
 import 'package:pal_mail/api/api_controller.dart';
 import 'package:pal_mail/controllers/CreateSenderController.dart';
+import 'package:pal_mail/controllers/ImagesController.dart';
 import 'package:pal_mail/models/ActivityModel.dart';
 import 'package:pal_mail/models/Categories.dart';
 import 'package:pal_mail/models/user_data.dart';
@@ -21,6 +24,7 @@ class AddInboxController {
     String? decision,
     List<Tag>? tags,
     List<ActivityModel>? activities,
+    List<File>? images,
   }) async {
     UserData admin = userFromJson(
         await SharedPrefController().getValueFor(key: PrefKeys.user.name));
@@ -53,6 +57,11 @@ class AddInboxController {
         'activities': activity,
       },
     );
+    if (images != null && images.isNotEmpty) {
+      for(int i = 0 ; i < images.length ; i++){
+        ImagesController().uploadImage(images[i], mailId)
+      }
+    }  
     return res.statusCode == 200 || res.statusCode == 201;
   }
 }

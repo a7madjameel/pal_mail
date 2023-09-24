@@ -73,6 +73,7 @@ class ProvidersManager {
         activities: activties,
         decision: decision,
         tags: tags,
+        images: images,
       );
       if (res) {
         resetProvidersOnCancelClicked(context);
